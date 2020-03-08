@@ -1,9 +1,11 @@
 using System;
 using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.Commands;
+using PaymentContext.Shared.Nofitications;
 
 namespace PaymentContext.Domain.Commands
 {
-    public class CreateBoletoSubscriptionCommand
+    public class CreateBoletoSubscriptionCommand: Notifiable, ICommand
     {
         public string FisrtName {get; set;}
         public string LastName {get; set;}
@@ -28,5 +30,13 @@ namespace PaymentContext.Domain.Commands
         public string State { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
+
+        public void Validate()
+        {
+            if  (string.IsNullOrEmpty(FisrtName))
+                AddNotification("Name.FirstName","Nome inválido");
+            if  (string.IsNullOrEmpty(LastName))
+                AddNotification("Name.LastName","Sobrenome inválido");
+        }
     }
 }
