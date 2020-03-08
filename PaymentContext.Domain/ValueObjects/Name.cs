@@ -17,7 +17,6 @@ namespace PaymentContext.Domain.ValueObjects
                 AddNotification("Name.LastName","Sobrenome inválido");
         }
 
-
         public string FisrtName {get; private set;}
         public string LastName {get; private set;}
 
