@@ -8,6 +8,9 @@ namespace PaymentContext.Domain.Entities{
         {
             BarCode = barCode;
             BoletoNumber = boletoNumber;
+
+            if (string.IsNullOrEmpty(BoletoNumber))
+                AddNotification("BoletoPayment.BoletoNumber","Numero de boleto vazio");
         }
 
         public string BarCode { get; private set; }

@@ -9,6 +9,9 @@ namespace PaymentContext.Domain.Entities{
             CarHolder = carHolder;
             CardNumber = cardNumber;
             LastTransactionNumber = lastTransactionNumber;
+
+            if (string.IsNullOrEmpty(CardNumber))
+                AddNotification("CreditCardPayment.CardNumber","Numero de cartão vazio");
         }
 
         public string CarHolder { get; private set; }

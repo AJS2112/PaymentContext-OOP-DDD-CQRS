@@ -1,8 +1,9 @@
 using System;
+using PaymentContext.Shared.Nofitications;
 
 namespace PaymentContext.Shared.Entities
 {
-    public abstract class Entity
+    public abstract class Entity : Notifiable
     {
         protected Entity()
         {

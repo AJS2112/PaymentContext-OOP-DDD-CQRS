@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using PaymentContext.Shared.Entities;
 
 namespace PaymentContext.Domain.Entities{
-    public class Subscription{
+    public class Subscription :  Entity
+    {
         private IList<Payment> _payments;
 
         public Subscription(DateTime? expireDate)
@@ -12,6 +14,9 @@ namespace PaymentContext.Domain.Entities{
             ExpireDate = expireDate;
             Active = true;
             _payments = new List<Payment>();
+
+            if (string.IsNullOrEmpty(ExpireDate.ToString()))
+                AddNotification("Subscription.ExpireDate","Data de expiração inválida");
         }
 
         public DateTime CreateDate {get; private set;}
@@ -21,6 +26,9 @@ namespace PaymentContext.Domain.Entities{
         public IReadOnlyCollection<Payment> Payments { get; private set; }
 
         public void AddPayment(Payment payment){
+            if  (payment.PaidDate<DateTime.Now)
+                AddNotification("Subscription.Payments","A data do pagamento deve ser futura");
+            //if (Valid) //Só adiciona se for válido
             _payments.Add(payment);
         }
 

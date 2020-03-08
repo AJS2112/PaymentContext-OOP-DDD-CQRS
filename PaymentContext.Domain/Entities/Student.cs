@@ -24,12 +24,15 @@ namespace PaymentContext.Domain.Entities{
 
         public void AddSubscription(Subscription subscription)
         {
-            //Se já tiver uma assinatura ativa, cancela
-            
-            //Cancela todas as outras assinaturas, e coloca esta como principal
+            var hasSubscriptionActive = false;
             foreach (var sub in Subscriptions){
-                sub.Inactivate();
+                //sub.Inactivate();
+                if (sub.Active)
+                    hasSubscriptionActive=true;
             } 
+
+            if (hasSubscriptionActive)
+            AddNotification("Student.Subscription", "Você já tem uma assinatura ativa");
 
             _subscriptions.Add(subscription);
 
