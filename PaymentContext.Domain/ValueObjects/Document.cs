@@ -5,11 +5,12 @@ namespace PaymentContext.Domain.ValueObjects
 {
     public class Document : ValueObject
     {
-        public Document(string number, EDocumentType type){
+        public Document(string number, EDocumentType type)
+        {
             Number = number;
             Type = type;
 
-            
+            Validate();
         }
      public string Number { get; private set; }   
      public EDocumentType Type { get; private set; }

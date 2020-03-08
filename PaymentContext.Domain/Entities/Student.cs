@@ -32,7 +32,10 @@ namespace PaymentContext.Domain.Entities{
             } 
 
             if (hasSubscriptionActive)
-            AddNotification("Student.Subscription", "Você já tem uma assinatura ativa");
+                AddNotification("Student.Subscription", "Você já tem uma assinatura ativa");
+            if (subscription.Payments.Count < 0)
+                AddNotification("Student.Subscription.Payments", "Esta assinatura não possui pagamentos");
+            
 
             _subscriptions.Add(subscription);
 
